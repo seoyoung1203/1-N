@@ -8,5 +8,10 @@ class Article(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 
-# class Comment(models.Model):
-#     pass
+class Comment(models.Model):
+    content = models.TextField()
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+
+
+
+
