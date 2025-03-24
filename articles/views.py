@@ -70,6 +70,13 @@ def comment_create(request, article_id):
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
-            form.save()
+            comment = form.save(commit=False)
+
+# article 찾기
+            article = Article.objects.get(id=article_id)
+            comment.article = article
+            comment.save()
+
+            return redirect('articles:detail', id=article_id)
     else:
         return redirect('articles:index')
